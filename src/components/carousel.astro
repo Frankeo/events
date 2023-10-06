@@ -1,0 +1,64 @@
+---
+import Card from "../components/card.astro";
+
+import { getCollection } from "astro:content";
+
+const events = await getCollection("event");
+---
+
+<div class="is-flex">
+  <div class="columns fullwidth is-mobile">
+    {
+      events.map((evnt) => {
+        return (
+          <div class="column is-one-quarter-desktop is-full-mobile">
+            <Card
+              slug={evnt.slug}
+              title={evnt.data.title}
+              image={evnt.data.image}
+              summary={evnt.data.summary}
+              date={evnt.data.date}
+            />
+          </div>
+        );
+      })
+    }
+  </div>
+  <div class="floating">
+    <button class="button is-primary left is-hidden">
+      <span class="icon">
+        <i class="fa-solid fa-arrow-left"></i>
+      </span>
+    </button>
+    <button class="button is-primary right">
+      <span class="icon">
+        <i class="fa-solid fa-arrow-right"></i>
+      </span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .fullwidth {
+    width: 100%;
+    margin-left: 0px;
+  }
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
+  .floating {
+    left: 0%;
+    width: 100%;
+    position: absolute;
+    align-self: center;
+    z-index: 1;
+  }
+</style>
+
+<script>
+  import { carouselFn } from "./carousel";
+  carouselFn();
+</script>

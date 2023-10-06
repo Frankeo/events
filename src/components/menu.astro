@@ -1,0 +1,102 @@
+---
+import "@fortawesome/fontawesome-free";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <figure class="image is-32x32 is-flex is-align-items-center">
+        <img src="/favicon.svg" />
+      </figure>
+      <p class="title">{title}</p>
+    </a>
+
+    <a
+      role="button"
+      class="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarPages"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarPages" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/events"> Events</a>
+      <a class="navbar-item" href="/contact"> Contact</a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary is-outlined is-light is-rounded" href="/">
+            <span class="icon">
+              <i class="fa-brands fa-lg fa-facebook-f"></i>
+            </span></a
+          >
+          <a class="button is-primary is-outlined is-light is-rounded" href="/">
+            <span class="icon">
+              <i class="fa-brands fa-lg fa-instagram"></i>
+            </span></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- <section class="hero is-small is-primary">
+  <div
+    class="hero-body is-flex is-align-items-center is-justify-content-space-between"
+  >
+    <div class="is-flex is-align-items-center">
+      <figure class="image is-48x48">
+        <img src="/favicon.svg" />
+      </figure>
+      <p class="title">{title}</p>
+    </div>
+    <a class="button is-primary is-outlined is-light" href="/logout">Salir</a>
+    <a class="button is-primary is-outlined is-light is-rounded" href="/">
+      <span class="icon">
+        <i class="fa-brands fa-lg fa-facebook-f"></i>
+      </span></a
+    >
+    <a class="button is-primary is-outlined is-light is-rounded" href="/">
+      <span class="icon">
+        <i class="fa-brands fa-lg fa-instagram"></i>
+      </span></a
+    >
+  </div>
+</section> -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(
+      document.querySelectorAll(".navbar-burger"),
+      0
+    );
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach((el) => {
+      el.addEventListener("click", () => {
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle("is-active");
+        $target?.classList.toggle("is-active");
+      });
+    });
+  });
+</script>

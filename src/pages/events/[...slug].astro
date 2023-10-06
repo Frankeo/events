@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/template.astro";
+
+export async function getStaticPaths() {
+  const eventEntries = await getCollection("event");
+  return eventEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <section class="section has-background-primary-light">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-2"></div>
+        <div class="column is-8">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-3by2">
+                <img src={entry.data.image} alt="Placeholder image" />
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-1">{entry.data.title}</p>
+              <div class="content">
+                <p class="subtitle">{entry.data.summary}</p>
+                <ul>
+                  <li>
+                    <strong>Fecha:</strong>
+                    <time datetime={entry.data.date.toISOString()}
+                      >{` ${entry.data.date.toDateString()}`}</time
+                    >
+                    <li>
+                      <strong>Incluye:</strong>
+                      <Content />
+                    </li>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-2"></div>
+      </div>
+    </div>
+  </section>
+</Layout>

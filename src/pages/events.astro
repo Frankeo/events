@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/template.astro";
+import Card from "../components/card.astro";
+import { getCollection } from "astro:content";
+
+const events = await getCollection("event");
+---
+
+<Layout title="Events">
+  <section class="section">
+    <h1 class="title">All the Events</h1>
+    <div class="columns is-multiline">
+      {
+        events.map((event) => {
+          return (
+            <div class="column is-one-quarter">
+              <Card
+                slug={event.slug}
+                title={event.data.title}
+                image={event.data.image}
+                summary={event.data.summary}
+                date={event.data.date}
+              />
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  summary: string;
+  image: string;
+  date: Date;
+}
+
+const { title, image, summary, date, slug } = Astro.props;
+---
+
+<div class="card">
+  <a href=`/events/${slug}`>
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src={image} alt="Placeholder image" />
+      </figure>
+    </div>
+    <div class="card-content">
+      <p class="title is-4">{title}</p>
+      <div class="content subtitle">
+        <p>{summary}</p>
+        <time datetime={date.toISOString()}>{date.toDateString()}</time>
+      </div>
+    </div>
+  </a>
+</div>
